@@ -1,16 +1,48 @@
-# React + Vite
+# ShopEase – Online Shopping Cart Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+ShopEase is a React-based online shopping cart application that allows users to browse products and manage their shopping cart with dynamic price calculations.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Display product listings.
+- Add and remove products from the cart.
+- Increase and decrease product quantities.
+- Apply coupon codes for discounts.
+- Automatically calculate subtotal, discount and GST.
+- Manage cart state using React Context API and useReducer.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- JavaScript
+- HTML
+- CSS
+- React Context API
+- useReducer
+- Vite
 
-## Expanding the Oxlint configuration
+## Installation and Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+1. Clone the repository:
+
+   `git clone https://github.com/Sweta-Dutta19/ShopEase-Online-Shopping-Cart.git`
+
+2. Navigate to the project directory:
+
+   `cd ShopEase-Online-Shopping-Cart/shopping-cart`
+
+3. Install dependencies:
+
+   `npm install`
+
+4. Start the development server:
+
+   `npm run dev`
+
+5. Open the local URL displayed in the terminal.
+
+## Author
+
+Sweta Dutta
+
+GitHub: https://github.com/Sweta-Dutta19
