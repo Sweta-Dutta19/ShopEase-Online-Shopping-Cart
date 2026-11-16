@@ -9,7 +9,7 @@ function Header() {
 
         <div className="header-logo">
           <div className="shop-logo">
-            Shop<span>Ease</span>
+            Shop<span>Kart</span>
           </div>
           <small>in</small>
         </div>
@@ -35,7 +35,7 @@ function Header() {
 
           <input
             type="text"
-            placeholder="Search ShopEase"
+            placeholder="Search ShopKart"
           />
 
           <button>
@@ -82,7 +82,7 @@ function Header() {
         <div>Customer Service</div>
 
         <div className="nav-right">
-          🛍️ ShopEase Shopping Festival
+          🛍️ ShopKart Shopping Festival
         </div>
 
       </nav>

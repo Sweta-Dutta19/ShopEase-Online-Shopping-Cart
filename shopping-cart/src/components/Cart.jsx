@@ -22,7 +22,7 @@ function Cart() {
           </div>
 
           <h2>
-            Your ShopEase Cart is empty.
+            Your ShopKart Cart is empty.
           </h2>
 
           <p>

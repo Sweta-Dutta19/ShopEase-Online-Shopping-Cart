@@ -15,7 +15,7 @@ function App() {
           <div className="hero-text">
 
             <span>
-              SHOPEASE FESTIVAL
+              SHOPKART FESTIVAL
             </span>
 
             <h1>
@@ -50,11 +50,11 @@ function App() {
       <footer className="amazon-footer">
 
         <div className="footer-logo">
-          Shop<span>Ease</span>
+          Shop<span>Kart</span>
         </div>
 
         <p>
-          © 2026 ShopEase · React State Management
+          © 2026 ShopKart · React State Management
           Assignment
         </p>
 
