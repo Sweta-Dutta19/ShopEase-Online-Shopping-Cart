@@ -1,140 +1,153 @@
-import { useState } from "react";
 import { useCart } from "../context/CartContext";
+import CartItem from "./CartItem";
+import Coupon from "./Coupon";
 
 function Cart() {
-  const { state, dispatch } = useCart();
+  const {
+    cart,
+    subtotal,
+    discount,
+    gst,
+    grandTotal,
+  } = useCart();
 
-  const [couponCode, setCouponCode] = useState("");
-  const [couponMessage, setCouponMessage] = useState("");
+  if (cart.length === 0) {
+    return (
+      <section className="cart-container">
 
-  const subtotal = state.cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+        <div className="empty-cart">
 
-  const discount = (subtotal * state.coupon) / 100;
+          <div className="empty-cart-icon">
+            🛒
+          </div>
 
-  const discountedTotal = subtotal - discount;
+          <h2>
+            Your ShopEase Cart is empty.
+          </h2>
 
-  const gst = discountedTotal * 0.18;
+          <p>
+            Check out today's deals and add something
+            you love to your cart.
+          </p>
 
-  const grandTotal = discountedTotal + gst;
+        </div>
 
-  const applyCoupon = () => {
-    if (couponCode.toUpperCase() === "SAVE10") {
-      dispatch({
-        type: "APPLY_COUPON",
-        payload: 10,
-      });
-
-      setCouponMessage("Coupon applied! 10% discount.");
-    } else {
-      dispatch({
-        type: "APPLY_COUPON",
-        payload: 0,
-      });
-
-      setCouponMessage("Invalid coupon code.");
-    }
-  };
+      </section>
+    );
+  }
 
   return (
-    <div className="cart">
-      <h2>🛒 Shopping Cart</h2>
+    <section className="cart-container">
 
-      {state.cart.length === 0 ? (
-        <p className="empty">Your cart is empty.</p>
-      ) : (
-        <>
-          {state.cart.map((item) => (
-            <div className="cart-item" key={item.id}>
-              <div>
-                <h3>{item.name}</h3>
-                <p>₹{item.price}</p>
-              </div>
+      <div className="cart-left">
 
-              <div className="quantity">
-                <button
-                  onClick={() =>
-                    dispatch({
-                      type: "DECREASE_QUANTITY",
-                      payload: item.id,
-                    })
-                  }
-                >
-                  -
-                </button>
+        <div className="cart-title">
 
-                <span>{item.quantity}</span>
+          <h1>
+            Shopping Cart
+          </h1>
 
-                <button
-                  onClick={() =>
-                    dispatch({
-                      type: "INCREASE_QUANTITY",
-                      payload: item.id,
-                    })
-                  }
-                >
-                  +
-                </button>
-              </div>
+          <span>
+            Price
+          </span>
 
-              <p>
-                ₹{(item.price * item.quantity).toFixed(2)}
-              </p>
+        </div>
 
-              <button
-                className="remove"
-                onClick={() =>
-                  dispatch({
-                    type: "REMOVE_FROM_CART",
-                    payload: item.id,
-                  })
-                }
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+        {cart.map((item) => (
+          <CartItem
+            key={item.id}
+            item={item}
+          />
+        ))}
 
-          <div className="coupon">
-            <input
-              type="text"
-              placeholder="Enter coupon code"
-              value={couponCode}
-              onChange={(e) => setCouponCode(e.target.value)}
-            />
+        <div className="cart-subtotal">
+          Subtotal ({cart.length} item
+          {cart.length !== 1 ? "s" : ""}):
+          <strong>
+            ₹{subtotal.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+            })}
+          </strong>
+        </div>
 
-            <button onClick={applyCoupon}>Apply Coupon</button>
+        <Coupon />
 
-            {couponMessage && <p>{couponMessage}</p>}
-          </div>
+      </div>
 
-          <div className="summary">
-            <h3>Order Summary</h3>
+      <aside className="order-summary">
 
-            <p>
-              Subtotal: <span>₹{subtotal.toFixed(2)}</span>
-            </p>
+        <div className="free-delivery">
+          ✓ Your order qualifies for
+          <strong> FREE Delivery</strong>
+        </div>
 
-            <p>
-              Discount: <span>- ₹{discount.toFixed(2)}</span>
-            </p>
+        <h2>
+          Order Summary
+        </h2>
 
-            <p>
-              GST (18%): <span>₹{gst.toFixed(2)}</span>
-            </p>
+        <div className="summary-line">
+          <span>
+            Subtotal
+          </span>
 
-            <hr />
+          <strong>
+            ₹{subtotal.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+            })}
+          </strong>
+        </div>
 
-            <h2>
-              Grand Total: ₹{grandTotal.toFixed(2)}
-            </h2>
-          </div>
-        </>
-      )}
-    </div>
+        <div className="summary-line discount">
+          <span>
+            Coupon Discount
+          </span>
+
+          <strong>
+            − ₹{discount.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+            })}
+          </strong>
+        </div>
+
+        <div className="summary-line">
+          <span>
+            GST (18%)
+          </span>
+
+          <strong>
+            ₹{gst.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+            })}
+          </strong>
+        </div>
+
+        <div className="summary-total">
+
+          <span>
+            Order Total
+          </span>
+
+          <strong>
+            ₹{grandTotal.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+            })}
+          </strong>
+
+        </div>
+
+        <button className="checkout-button">
+          Proceed to Buy
+        </button>
+
+        <div className="secure-checkout">
+          🔒 Secure transaction
+        </div>
+
+      </aside>
+
+    </section>
   );
 }
 
 export default Cart;
+

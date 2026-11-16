@@ -1,92 +1,68 @@
-import "./App.css";
+import Header from "./components/Header";
 import ProductList from "./components/ProductList";
 import Cart from "./components/Cart";
 
 function App() {
   return (
-    <div className="shopping-app">
+    <div className="app">
 
-      <header className="shopping-header">
-        <div className="brand">
-          <div className="brand-icon">🛍️</div>
+      <Header />
 
-          <div>
-            <h1>ShopEase</h1>
-            <p>Your favorite products, all in one place</p>
-          </div>
-        </div>
+      <main>
 
-        <div className="header-badge">
-          ✨ Easy Shopping
-        </div>
-      </header>
+        <section className="hero-banner">
 
-      <div className="hero-section">
-        <div>
-          <span className="hero-tag">WELCOME TO SHOPEASE</span>
+          <div className="hero-text">
 
-          <h2>
-            Shop smarter.
-            <br />
-            <span>Live better.</span>
-          </h2>
+            <span>
+              SHOPEASE FESTIVAL
+            </span>
 
-          <p>
-            Discover amazing products and manage your cart effortlessly.
-          </p>
+            <h1>
+              Great Deals.
+              <br />
+              Amazing Prices.
+            </h1>
 
-          <button
-            className="shop-now-btn"
-            onClick={() =>
-              document
-                .getElementById("products")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Explore Products →
-          </button>
-        </div>
+            <p>
+              Discover electronics, gaming accessories,
+              smart devices and much more.
+            </p>
 
-        <div className="hero-emoji">
-          🛒
-        </div>
-      </div>
+            <button>
+              Shop Today's Deals
+            </button>
 
-      <main className="shopping-main">
-
-        <section className="products-section" id="products">
-          <div className="section-heading">
-            <div>
-              <span>OUR COLLECTION</span>
-              <h2>Featured Products</h2>
-            </div>
-
-            <div className="section-decoration">
-              ✦ ✦ ✦
-            </div>
           </div>
 
-          <ProductList />
+          <div className="hero-graphic">
+            🛍️
+          </div>
+
         </section>
 
-        <section className="cart-wrapper">
-          <div className="cart-heading">
-            <span>🛒</span>
+        <ProductList />
 
-            <div>
-              <span>YOUR SELECTION</span>
-              <h2>Shopping Cart</h2>
-            </div>
-          </div>
-
-          <Cart />
-        </section>
+        <Cart />
 
       </main>
 
-      <footer className="shopping-footer">
-        <p>🛍️ ShopEase</p>
-        <span>Happy shopping, happy living ✨</span>
+      <footer className="amazon-footer">
+
+        <div className="footer-logo">
+          Shop<span>Ease</span>
+        </div>
+
+        <p>
+          © 2026 ShopEase · React State Management
+          Assignment
+        </p>
+
+        <p>
+          Built with React + Context API +
+          useReducer
+        </p>
+
       </footer>
 
     </div>

@@ -4,7 +4,7 @@ const CartContext = createContext();
 
 const initialState = {
   cart: [],
-  coupon: 0,
+  coupon: null,
 };
 
 function cartReducer(state, action) {
@@ -19,7 +19,10 @@ function cartReducer(state, action) {
           ...state,
           cart: state.cart.map((item) =>
             item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? {
+                  ...item,
+                  quantity: item.quantity + 1,
+                }
               : item
           ),
         };
@@ -27,14 +30,22 @@ function cartReducer(state, action) {
 
       return {
         ...state,
-        cart: [...state.cart, { ...action.payload, quantity: 1 }],
+        cart: [
+          ...state.cart,
+          {
+            ...action.payload,
+            quantity: 1,
+          },
+        ],
       };
     }
 
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: state.cart.filter(
+          (item) => item.id !== action.payload
+        ),
       };
 
     case "INCREASE_QUANTITY":
@@ -42,7 +53,10 @@ function cartReducer(state, action) {
         ...state,
         cart: state.cart.map((item) =>
           item.id === action.payload
-            ? { ...item, quantity: item.quantity + 1 }
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
             : item
         ),
       };
@@ -53,7 +67,10 @@ function cartReducer(state, action) {
         cart: state.cart
           .map((item) =>
             item.id === action.payload
-              ? { ...item, quantity: item.quantity - 1 }
+              ? {
+                  ...item,
+                  quantity: item.quantity - 1,
+                }
               : item
           )
           .filter((item) => item.quantity > 0),
@@ -65,16 +82,107 @@ function cartReducer(state, action) {
         coupon: action.payload,
       };
 
+    case "REMOVE_COUPON":
+      return {
+        ...state,
+        coupon: null,
+      };
+
     default:
       return state;
   }
 }
 
 export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [state, dispatch] = useReducer(
+    cartReducer,
+    initialState
+  );
+
+  const addToCart = (product) => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: product,
+    });
+  };
+
+  const removeFromCart = (id) => {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: id,
+    });
+  };
+
+  const increaseQuantity = (id) => {
+    dispatch({
+      type: "INCREASE_QUANTITY",
+      payload: id,
+    });
+  };
+
+  const decreaseQuantity = (id) => {
+    dispatch({
+      type: "DECREASE_QUANTITY",
+      payload: id,
+    });
+  };
+
+  const applyCoupon = (coupon) => {
+    dispatch({
+      type: "APPLY_COUPON",
+      payload: coupon,
+    });
+  };
+
+  const removeCoupon = () => {
+    dispatch({
+      type: "REMOVE_COUPON",
+    });
+  };
+
+  const subtotal = state.cart.reduce(
+    (total, item) =>
+      total + item.price * item.quantity,
+    0
+  );
+
+  const discount = state.coupon
+    ? (subtotal * state.coupon.discount) / 100
+    : 0;
+
+  const taxableAmount = subtotal - discount;
+
+  const gst = taxableAmount * 0.18;
+
+  const grandTotal = taxableAmount + gst;
+
+  const cartCount = state.cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider
+      value={{
+        cart: state.cart,
+        coupon: state.coupon,
+
+        addToCart,
+        removeFromCart,
+        increaseQuantity,
+        decreaseQuantity,
+
+        applyCoupon,
+        removeCoupon,
+
+        subtotal,
+        discount,
+        gst,
+        grandTotal,
+
+        cartCount,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
