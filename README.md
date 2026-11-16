@@ -1,48 +1,60 @@
-# ShopEase – Online Shopping Cart Application
+# ShopKart – Online Shopping Cart Application
 
-ShopEase is a React-based online shopping cart application that allows users to browse products and manage their shopping cart with dynamic price calculations.
+ShopKart is a React-based online shopping cart application that provides an interactive shopping experience. Users can browse products, add items to their cart, manage product quantities, apply coupon codes, and view automatically calculated prices, including discounts and GST.
 
 ## Features
 
 - Display product listings.
-- Add and remove products from the cart.
-- Increase and decrease product quantities.
+- Add and remove products from the shopping cart.
+- Increase or decrease product quantities.
 - Apply coupon codes for discounts.
-- Automatically calculate subtotal, discount and GST.
+- Automatically calculate subtotal, discount, GST, and final total.
 - Manage cart state using React Context API and useReducer.
 
 ## Technologies Used
 
 - React.js
 - JavaScript
-- HTML
-- CSS
+- HTML5
+- CSS3
 - React Context API
-- useReducer
+- useReducer Hook
 - Vite
 
 ## Installation and Setup
 
-1. Clone the repository:
+Follow these steps to run the project locally.
 
-   `git clone https://github.com/Sweta-Dutta19/ShopEase-Online-Shopping-Cart.git`
+### 1. Clone the repository
 
-2. Navigate to the project directory:
+```bash
+git clone https://github.com/Sweta-Dutta19/ShopKart-Online-Shopping-Cart.git
+```
 
-   `cd ShopEase-Online-Shopping-Cart`
+### 2. Navigate to the project directory
 
-3. Install dependencies:
+```bash
+cd ShopKart-Online-Shopping-Cart
+```
 
-   `npm install`
+### 3. Install dependencies
 
-4. Start the development server:
+```bash
+npm install
+```
 
-   `npm run dev`
+### 4. Start the development server
 
-5. Open the local URL displayed in the terminal.
+```bash
+npm run dev
+```
+
+### 5. Open the application
+
+Open the local URL displayed in your terminal to access ShopKart in your browser.
 
 ## Author
 
-Sweta Dutta
+**Sweta Dutta**
 
-GitHub: https://github.com/Sweta-Dutta19
+GitHub: [Sweta-Dutta19](https://github.com/Sweta-Dutta19)
